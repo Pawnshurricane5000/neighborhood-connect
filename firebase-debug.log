@@ -1,0 +1,22 @@
+[debug] [2025-09-07T02:41:44.313Z] ----------------------------------------------------------------------
+[debug] [2025-09-07T02:41:44.322Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\samay_5ssjhc1\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2025-09-07T02:41:44.323Z] CLI Version:   14.15.2
+[debug] [2025-09-07T02:41:44.323Z] Platform:      win32
+[debug] [2025-09-07T02:41:44.323Z] Node Version:  v24.6.0
+[debug] [2025-09-07T02:41:44.324Z] Time:          Sat Sep 06 2025 21:41:44 GMT-0500 (Central Daylight Time)
+[debug] [2025-09-07T02:41:44.324Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  The Firebase CLI’s MCP server feature can optionally make use of Gemini in Firebase. Learn more about Gemini in Firebase and how it uses your data: https://firebase.google.com/docs/gemini-in-firebase#how-gemini-in-firebase-uses-your-data 
+[debug] [2025-09-07T02:43:22.586Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (C:\Users\samay_5ssjhc1\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\@inquirer\core\dist\commonjs\lib\create-prompt.js:101:37)
+    at Interface.emit (node:events:508:28)
+    at Interface.emit (node:domain:489:12)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1315:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:284:20)
+    at ReadStream.emit (node:events:520:35)
+    at ReadStream.emit (node:domain:489:12)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+[error] 
+[error] Error: An unexpected error has occurred.
