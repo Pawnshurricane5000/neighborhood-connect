@@ -1,54 +1,73 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Your Profile - NeighborConnect</title>
+    <title>Sign Up - NeighborConnect</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Create your NeighborConnect account to start messaging with neighbors">
+    <meta name="theme-color" content="#FF6F61">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="NeighborConnect">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FCE8F6 0%, #FF6F61 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 1rem;
+            padding: 20px;
         }
-        
         
         .signup-container {
             background: white;
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 3rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
             max-width: 500px;
             width: 100%;
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: #667eea;
+            color: #FF6F61;
             margin-bottom: 0.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
         .subtitle {
             color: #666;
-            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
         }
         
         .form-group {
             margin-bottom: 1.5rem;
+            text-align: left;
         }
         
         .form-group label {
@@ -58,83 +77,61 @@
             color: #333;
         }
         
-        .form-group input,
-        .form-group select {
+        .form-group input {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
             box-sizing: border-box;
         }
         
-        .form-group input:focus,
-        .form-group select:focus {
+        .form-group input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #FF6F61;
+            box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.1);
         }
         
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .submit-btn {
-            background: #667eea;
+        .signup-btn {
+            background: #FF6F61;
             color: white;
             border: none;
             padding: 1rem 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-        
-        .submit-btn:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-        }
-        
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .back-btn {
-            background: transparent;
-            color: #667eea;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
         }
         
-        .back-btn:hover {
-            background: #f0f2ff;
+        .signup-btn:hover {
+            background: #e55a4f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
+        }
+        
+        .login-link {
+            color: #6B5B95;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link:hover {
+            text-decoration: underline;
         }
         
         .loading {
             display: none;
-            text-align: center;
             color: #666;
             margin-top: 1rem;
         }
         
         .spinner {
             border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
+            border-top: 2px solid #FF6F61;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -152,503 +149,70 @@
             color: #e74c3c;
             font-size: 0.9rem;
             margin-top: 0.5rem;
-        }
-        
-        .success {
-            color: #27ae60;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="signup-container">
-        <button class="back-btn" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i> Back to Login
-        </button>
-        
-        <div class="header">
-            <div class="logo">
-                <i class="fas fa-user-plus"></i>
-                Complete Your Profile
-            </div>
-            <p class="subtitle">Tell us about yourself to get started with NeighborConnect</p>
-        </div>
-        
-        <form id="signupForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName">First Name *</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name *</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="city">City *</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label for="state">State *</label>
-                    <select id="state" name="state" required>
-                        <option value="">Select State</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="zipCode">ZIP Code *</label>
-                <input type="text" id="zipCode" name="zipCode" required pattern="[0-9]{5}(-[0-9]{4})?" placeholder="12345">
-            </div>
-            
-            <div class="form-group">
-                <label for="interests">What are you interested in? (Select all that apply)</label>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="helping" style="margin-right: 0.5rem;">
-                        Helping Others
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="community" style="margin-right: 0.5rem;">
-                        Community Events
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="emergency" style="margin-right: 0.5rem;">
-                        Emergency Response
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="neighborhood" style="margin-right: 0.5rem;">
-                        Neighborhood Watch
-                    </label>
-                </div>
-            </div>
-            
-            <button type="submit" class="submit-btn" id="submitBtn">
-                Complete Registration
-            </button>
-            
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                Creating your account...
-            </div>
-            
-            <div id="errorMessage" class="error" style="display: none;"></div>
-            <div id="successMessage" class="success" style="display: none;"></div>
-        </form>
-    </div>
-
-    <script>
-        function goBack() {
-            window.location.href = 'index.html';
-        }
-        
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Validate required fields
-            const requiredFields = ['firstName', 'lastName', 'email', 'city', 'state', 'zipCode'];
-            const missingFields = requiredFields.filter(field => !data[field]);
-            
-            if (missingFields.length > 0) {
-                showError('Please fill in all required fields: ' + missingFields.join(', '));
-                return;
-            }
-            
-            // Show loading
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('errorMessage').style.display = 'none';
-            
-            // Simulate account creation
-            setTimeout(() => {
-                // Hide loading
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('submitBtn').disabled = false;
-                
-                // Show success message
-                showSuccess('Account created successfully! Redirecting to help requests...');
-                
-                // Redirect to help requests page after 2 seconds
-                setTimeout(() => {
-                    window.location.href = 'help-requests.html';
-                }, 2000);
-            }, 2000);
-        });
-        
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-        }
-        
-        function showSuccess(message) {
-            const successDiv = document.getElementById('successMessage');
-            successDiv.textContent = message;
-            successDiv.style.display = 'block';
-            document.getElementById('errorMessage').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Your Profile - NeighborConnect</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 1rem;
-        }
-        
-        .signup-container {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            color: #666;
-            font-size: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .submit-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-        
-        .submit-btn:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-        }
-        
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .back-btn {
-            background: transparent;
-            color: #667eea;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .back-btn:hover {
-            background: #f0f2ff;
-        }
-        
-        .loading {
             display: none;
-            text-align: center;
-            color: #666;
-            margin-top: 1rem;
-        }
-        
-        .spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .error {
-            color: #e74c3c;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
         }
         
         .success {
             color: #27ae60;
             font-size: 0.9rem;
             margin-top: 0.5rem;
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .signup-container {
+                padding: 2rem;
+                margin: 10px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="signup-container">
-        <button class="back-btn" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i> Back to Login
-        </button>
-        
-        <div class="header">
-            <div class="logo">
-                <i class="fas fa-user-plus"></i>
-                Complete Your Profile
-            </div>
-            <p class="subtitle">Tell us about yourself to get started with NeighborConnect</p>
+        <div class="logo">
+            <i class="fas fa-home"></i>
+            NeighborConnect
         </div>
+        <p class="subtitle">Create your account to start connecting with neighbors</p>
         
         <form id="signupForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName">First Name *</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name *</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <div class="error" id="usernameError"></div>
             </div>
             
             <div class="form-group">
-                <label for="email">Email Address *</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <div class="error" id="emailError"></div>
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="city">City *</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label for="state">State *</label>
-                    <select id="state" name="state" required>
-                        <option value="">Select State</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                </div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error" id="passwordError"></div>
             </div>
             
             <div class="form-group">
-                <label for="zipCode">ZIP Code *</label>
-                <input type="text" id="zipCode" name="zipCode" required pattern="[0-9]{5}(-[0-9]{4})?" placeholder="12345">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <div class="error" id="fullNameError"></div>
             </div>
             
             <div class="form-group">
-                <label for="interests">What are you interested in? (Select all that apply)</label>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="helping" style="margin-right: 0.5rem;">
-                        Helping Others
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="community" style="margin-right: 0.5rem;">
-                        Community Events
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="emergency" style="margin-right: 0.5rem;">
-                        Emergency Response
-                    </label>
-                    <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
-                        <input type="checkbox" name="interests" value="neighborhood" style="margin-right: 0.5rem;">
-                        Neighborhood Watch
-                    </label>
-                </div>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+                <div class="error" id="cityError"></div>
             </div>
             
-            <button type="submit" class="submit-btn" id="submitBtn">
-                Complete Registration
+            <button type="submit" class="signup-btn">
+                <i class="fas fa-user-plus"></i>
+                Create Account
             </button>
             
             <div class="loading" id="loading">
@@ -656,67 +220,75 @@
                 Creating your account...
             </div>
             
-            <div id="errorMessage" class="error" style="display: none;"></div>
-            <div id="successMessage" class="success" style="display: none;"></div>
+            <div class="success" id="success">
+                <i class="fas fa-check-circle"></i>
+                Account created successfully! Redirecting...
+            </div>
         </form>
+        
+        <p>Already have an account? <a href="index.html" class="login-link">Login here</a></p>
     </div>
 
     <script>
-        function goBack() {
-            window.location.href = 'index.html';
-        }
-        
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(this);
+            const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
-            // Validate required fields
-            const requiredFields = ['firstName', 'lastName', 'email', 'city', 'state', 'zipCode'];
-            const missingFields = requiredFields.filter(field => !data[field]);
-            
-            if (missingFields.length > 0) {
-                showError('Please fill in all required fields: ' + missingFields.join(', '));
-                return;
-            }
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.success').forEach(el => el.style.display = 'none');
             
             // Show loading
             document.getElementById('loading').style.display = 'block';
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('errorMessage').style.display = 'none';
             
-            // Simulate account creation
-            setTimeout(() => {
-                // Hide loading
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Store token
+                    localStorage.setItem('token', result.token);
+                    localStorage.setItem('user', JSON.stringify(result.user));
+                    
+                    // Show success
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('success').style.display = 'block';
+                    
+                    // Redirect to messaging
+                    setTimeout(() => {
+                        window.location.href = '/messaging-login.html';
+                    }, 2000);
+                } else {
+                    // Show error
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    if (result.error.includes('username')) {
+                        document.getElementById('usernameError').textContent = result.error;
+                        document.getElementById('usernameError').style.display = 'block';
+                    } else if (result.error.includes('email')) {
+                        document.getElementById('emailError').textContent = result.error;
+                        document.getElementById('emailError').style.display = 'block';
+                    } else {
+                        document.getElementById('usernameError').textContent = result.error;
+                        document.getElementById('usernameError').style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('submitBtn').disabled = false;
-                
-                // Show success message
-                showSuccess('Account created successfully! Redirecting to help requests...');
-                
-                // Redirect to help requests page after 2 seconds
-                setTimeout(() => {
-                    window.location.href = 'help-requests.html';
-                }, 2000);
-            }, 2000);
+                document.getElementById('usernameError').textContent = 'Network error. Please try again.';
+                document.getElementById('usernameError').style.display = 'block';
+            }
         });
-        
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-        }
-        
-        function showSuccess(message) {
-            const successDiv = document.getElementById('successMessage');
-            successDiv.textContent = message;
-            successDiv.style.display = 'block';
-            document.getElementById('errorMessage').style.display = 'none';
-        }
     </script>
 </body>
 </html>
->>>>>>> 3dc65e7cba26a703c63e38d82ccff2cfbce780e2

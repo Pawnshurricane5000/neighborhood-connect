@@ -1,50 +1,39 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NeighborConnect</title>
+    <title>NeighborConnect - Connect with Your Neighbors</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Real-time messaging system for neighbors to connect and help their community">
+    <meta name="theme-color" content="#FF6F61">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="NeighborConnect">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons for different devices -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Firebase SDK v9 (compatible version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAMxV_GVOxQbtKEA-XiuGzFKIIi1HBMTjk",
-            authDomain: "neighbor-connect-2b315.firebaseapp.com",
-            projectId: "neighbor-connect-2b315",
-            storageBucket: "neighbor-connect-2b315.firebasestorage.app",
-            messagingSenderId: "640076784196",
-            appId: "1:640076784196:web:c10e2169714efcfb42d211",
-            measurementId: "G-G76NJM8Y5N"
-        };
-        
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        
-        // Configure Google provider
-        provider.addScope('email');
-        provider.addScope('profile');
-        
-        console.log('Firebase initialized successfully');
-        console.log('Google provider configured:', provider);
-    </script>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FCE8F6 0%, #FF6F61 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Inter', sans-serif;
             margin: 0;
+            padding: 20px;
         }
         
         .login-container {
@@ -54,13 +43,13 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             text-align: center;
             max-width: 400px;
-            width: 90%;
+            width: 100%;
         }
         
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: #667eea;
+            color: #FF6F61;
             margin-bottom: 0.5rem;
             text-align: center;
             display: flex;
@@ -73,14 +62,15 @@
             color: #666;
             margin-bottom: 2rem;
             font-size: 1.1rem;
+            line-height: 1.5;
         }
         
-        .google-login-btn {
-            background: #4285f4;
+        .login-btn {
+            background: #FF6F61;
             color: white;
             border: none;
             padding: 1rem 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -93,28 +83,18 @@
             margin-bottom: 1rem;
         }
         
-        .google-login-btn:hover {
-            background: #3367d6;
+        .login-btn:hover {
+            background: #e55a4f;
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
         }
         
-        .google-icon {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .divider {
-            margin: 1.5rem 0;
-            color: #999;
-            font-size: 0.9rem;
-        }
-        
-        .manual-login-btn {
+        .signup-btn {
             background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
+            color: #6B5B95;
+            border: 2px solid #6B5B95;
             padding: 1rem 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -122,218 +102,53 @@
             transition: all 0.3s ease;
         }
         
-        .manual-login-btn:hover {
-            background: #667eea;
+        .signup-btn:hover {
+            background: #6B5B95;
             color: white;
         }
         
-        .loading {
-            display: none;
-            color: #666;
-            margin-top: 1rem;
+        .features {
+            margin-top: 2rem;
+            text-align: left;
         }
         
-        .spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="logo">
-            <i class="fas fa-home"></i>
-            NeighborConnect
-        </div>
-        <p class="subtitle">Connect with your neighbors and help your community</p>
-        
-        <button class="google-login-btn">
-            <svg class="google-icon" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            Login with Google
-        </button>
-        
-        <div class="divider">or</div>
-        
-        <button class="manual-login-btn">
-            <i class="fas fa-user"></i>
-            Login with Username
-        </button>
-        
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            Checking your account...
-        </div>
-    </div>
-
-    <!-- Login functionality -->
-    <script src="login.js"></script>
-</body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NeighborConnect</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Firebase SDK v9 (compatible version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAMxV_GVOxQbtKEA-XiuGzFKIIi1HBMTjk",
-            authDomain: "neighbor-connect-2b315.firebaseapp.com",
-            projectId: "neighbor-connect-2b315",
-            storageBucket: "neighbor-connect-2b315.firebasestorage.app",
-            messagingSenderId: "640076784196",
-            appId: "1:640076784196:web:c10e2169714efcfb42d211",
-            measurementId: "G-G76NJM8Y5N"
-        };
-        
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        
-        // Configure Google provider
-        provider.addScope('email');
-        provider.addScope('profile');
-        
-        console.log('Firebase initialized successfully');
-        console.log('Google provider configured:', provider);
-    </script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+        .feature {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-        }
-        
-        .login-container {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #667eea;
+            gap: 0.5rem;
             margin-bottom: 0.5rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .subtitle {
             color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
         }
         
-        .google-login-btn {
-            background: #4285f4;
+        .install-prompt {
+            background: #88B04B;
             color: white;
-            border: none;
-            padding: 1rem 2rem;
+            padding: 1rem;
             border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            transition: all 0.3s ease;
             margin-bottom: 1rem;
+            display: none;
         }
         
-        .google-login-btn:hover {
-            background: #3367d6;
-            transform: translateY(-2px);
-        }
-        
-        .google-icon {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .divider {
-            margin: 1.5rem 0;
-            color: #999;
-            font-size: 0.9rem;
-        }
-        
-        .manual-login-btn {
-            background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1.1rem;
+        .install-btn {
+            background: white;
+            color: #88B04B;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             font-weight: 600;
             cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
+            margin-top: 0.5rem;
         }
         
-        .manual-login-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        .loading {
-            display: none;
-            color: #666;
-            margin-top: 1rem;
-        }
-        
-        .spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem;
+                margin: 10px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -343,33 +158,84 @@
             <i class="fas fa-home"></i>
             NeighborConnect
         </div>
-        <p class="subtitle">Connect with your neighbors and help your community</p>
+        <p class="subtitle">Connect with your neighbors and help your community through real-time messaging</p>
         
-        <button class="google-login-btn">
-            <svg class="google-icon" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            Login with Google
+        <div class="install-prompt" id="installPrompt">
+            <p><i class="fas fa-download"></i> Install NeighborConnect as an app for a better experience!</p>
+            <button class="install-btn" id="installBtn">Install App</button>
+        </div>
+        
+        <button class="login-btn" onclick="window.location.href='signup.html'">
+            <i class="fas fa-user-plus"></i>
+            Get Started
         </button>
         
-        <div class="divider">or</div>
-        
-        <button class="manual-login-btn">
-            <i class="fas fa-user"></i>
-            Login with Username
+        <button class="signup-btn" onclick="window.location.href='signup.html'">
+            <i class="fas fa-sign-in-alt"></i>
+            Already have an account? Login
         </button>
         
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            Checking your account...
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-comments" style="color: #FF6F61;"></i>
+                <span>Real-time messaging</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users" style="color: #6B5B95;"></i>
+                <span>Connect with neighbors</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt" style="color: #88B04B;"></i>
+                <span>Works on all devices</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt" style="color: #FF6F61;"></i>
+                <span>Secure and private</span>
+            </div>
         </div>
     </div>
 
-    <!-- Login functionality -->
-    <script src="login.js"></script>
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Install prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installPrompt.style.display = 'none';
+            }
+        });
+
+        // Handle app installed
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installPrompt.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
->>>>>>> 3dc65e7cba26a703c63e38d82ccff2cfbce780e2
